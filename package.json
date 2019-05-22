@@ -2,7 +2,7 @@
   "name": "swipe_to_close",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "http://evstarostin.github.io/swipe_to_close",
+  "homepage" : "https://evstarostin.github.io/swipe_to_close",
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
