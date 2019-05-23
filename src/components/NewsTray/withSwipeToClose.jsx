@@ -65,13 +65,14 @@ function withSwipeToClose(WrappedComponent) {
     handleTouchEndOrCancel = (e) => {
         const requiredDiffY = this.trayRef.clientHeight / 3;
 
-        this.trayRef.style.transform = '';
-        this.trayRef.style.transition = '';
-        this.isGesture = false;
-
         if (this.diffY > requiredDiffY) {
             this.props.onClose();
         }
+
+        this.diffY = 0;
+        this.trayRef.style.transform = '';
+        this.trayRef.style.transition = '';
+        this.isGesture = false;
     }
   
     render() {
