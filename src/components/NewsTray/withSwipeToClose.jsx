@@ -7,8 +7,6 @@ function withSwipeToClose(WrappedComponent) {
         
         this.trayRef = null;
         this.setTrayRef = element => { this.trayRef = element };
-        this.containerRef = null;
-        this.setContainerRef = element => { this.containerRef = element };
         this.contentRef = null;
         this.setContentRef = element => { this.contentRef = element };
 
@@ -19,17 +17,17 @@ function withSwipeToClose(WrappedComponent) {
     }
 
     componentDidMount() {
-        this.containerRef.addEventListener('touchstart', this.handleTouchStart);
-        this.containerRef.addEventListener('touchmove', this.handleTouchMove);
-        this.containerRef.addEventListener('touchend', this.handleTouchEndOrCancel);
-        this.containerRef.addEventListener('touchcancel', this.handleTouchEndOrCancel);
+        this.trayRef.addEventListener('touchstart', this.handleTouchStart);
+        this.trayRef.addEventListener('touchmove', this.handleTouchMove);
+        this.trayRef.addEventListener('touchend', this.handleTouchEndOrCancel);
+        this.trayRef.addEventListener('touchcancel', this.handleTouchEndOrCancel);
     }
 
     componentWillUnmount() {
-        this.containerRef.removeEventListener('touchstart', this.handleTouchStart);
-        this.containerRef.removeEventListener('touchmove', this.handleTouchMove);
-        this.containerRef.removeEventListener('touchend', this.handleTouchEndOrCancel);
-        this.containerRef.removeEventListener('touchcancel', this.handleTouchEndOrCancel);
+        this.trayRef.removeEventListener('touchstart', this.handleTouchStart);
+        this.trayRef.removeEventListener('touchmove', this.handleTouchMove);
+        this.trayRef.removeEventListener('touchend', this.handleTouchEndOrCancel);
+        this.trayRef.removeEventListener('touchcancel', this.handleTouchEndOrCancel);
     }
 
     handleTouchStart = (e) => {
@@ -80,7 +78,6 @@ function withSwipeToClose(WrappedComponent) {
             {...this.props}
             ref={this.ref}
             setTrayRef={this.setTrayRef}
-            setContainerRef={this.setContainerRef}
             setContentRef={this.setContentRef}
         />;
       }

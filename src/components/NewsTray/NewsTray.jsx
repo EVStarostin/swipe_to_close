@@ -48,7 +48,7 @@ class NewsTrayBase extends React.PureComponent {
                 ref={this.props.setTrayRef}
             >
                 <div className="news-tray__overlay" />
-                <div className="news-tray__container" ref={this.props.setContainerRef}>
+                <div className="news-tray__container">
                     {renderHeader && renderHeader('news-tray__header')}
                     <button
                         className="news-tray__close"
