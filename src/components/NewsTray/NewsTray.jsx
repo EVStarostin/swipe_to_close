@@ -100,5 +100,4 @@ class NewsTrayBase extends React.PureComponent {
     };
 }
 
-// export default NewsTray;
 export default withSwipeToClose(NewsTrayBase);
