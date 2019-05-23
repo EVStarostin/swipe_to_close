@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -30,4 +30,29 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.comments {
+  padding: 20px;
+}
+
+.comments__input {
+  border: 1px solid black;
+  font-size: 16px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+
+.header {
+  text-align: center;
+  padding: 10px;
+}
+
+.header__open {
+  padding: 5px 20px;
+  border: 1px solid black;
+}
+
+p {
+  margin: 0;
 }

@@ -1,0 +1,118 @@
+
+.news-tray {
+    position: fixed;
+    z-index: 50;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    height: calc(100% - 10px);
+
+    transition: transform .3s cubic-bezier(.42, 0, 1, 1);
+}
+
+.news-tray_mode_open {
+    top: 10px;
+
+    height: auto;
+
+    transform: translateY(0);
+}
+
+.news-tray_mode_closed {
+    visibility: hidden;
+
+    box-shadow: 0 -16px 24px rgba(34, 36, 38, .1);
+
+    transform: translateY(100%);
+    transition: transform .2s cubic-bezier(.42, 0, 1, 1);
+}
+
+.news-tray_mode_closed.news-tray_with_header {
+    visibility: visible;
+
+    transform: translateY(calc(100% - 52px));
+}
+
+.news-tray__container {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+
+    background-color: #fff;
+}
+
+.news-tray_mode_open .news-tray__container {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.news-tray__overlay {
+    position: absolute;
+    top: -100%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    transition: background-color .2s, transform 0s .2s;
+    transform: translateY(100%);
+}
+
+.news-tray_mode_open .news-tray__overlay {
+    background-color: rgba(0, 0, 0, .2);
+
+    transition: background-color .3s;
+    transform: translateY(0);
+}
+
+.news-tray__header {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    visibility: hidden;
+
+    height: 52px;
+
+    background-color: #fff;
+}
+
+.news-tray_mode_closed .news-tray__header {
+    visibility: visible;
+
+    transition: visibility 0s .2s;
+}
+
+.news-tray__close {
+    flex-shrink: 0;
+
+    height: 36px;
+
+    background: url(i/close.svg) center no-repeat;
+
+    outline: none;
+    border: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.news-tray__content {
+    overflow: auto;
+
+    padding: 0 10px-s;
+    -webkit-overflow-scrolling: touch;
+}
+
+.page_tray_open {
+    position: fixed;
+
+    overflow: hidden;
+
+    width: 100%;
+    height: 100%;
+}
