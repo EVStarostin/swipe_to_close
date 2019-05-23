@@ -97,7 +97,6 @@ class NewsTrayBase extends React.PureComponent {
             OSFamily: ''
         },
         onClose: () => null,
-        // ref: React.createRef()
     };
 }
 
