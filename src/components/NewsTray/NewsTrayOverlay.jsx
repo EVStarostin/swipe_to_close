@@ -7,6 +7,7 @@ class NewsTrayOverlay extends React.PureComponent {
         super(props);
 
         this.el = document.createElement('div');
+        this.el.className = 'news-tray__overlay-root';
     }
 
     componentDidMount() {
