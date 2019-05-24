@@ -8,7 +8,7 @@
     background-color: #000;
     opacity: 0;
     visibility: hidden;
-    transition: opacity .15s linear, visibility 0s .15s linear;
+    transition: opacity .15s linear, visibility 0s .15s;
 }
 
 .news-tray__overlay_visible {
