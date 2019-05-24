@@ -43,11 +43,10 @@ class NewsTray extends React.PureComponent {
         const { open } = this.state;
 
         const cls = 'news-tray';
-        const clsOpen = ' news-tray_mode_open';
-        const clsClosed = ' news-tray_mode_closed';
+        const clsOpen = ' news-tray_open';
         const clsWithHeader = ' news-tray_with_header';
 
-        let className = cls + (open ? clsOpen : clsClosed) + (renderHeader ? clsWithHeader : '');
+        let className = cls + (open ? clsOpen : '') + (renderHeader ? clsWithHeader : '');
 
         return (
             <>
