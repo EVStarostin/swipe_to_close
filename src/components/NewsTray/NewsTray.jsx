@@ -1,6 +1,7 @@
 import React from 'react';
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import withSwipeToClose from './withSwipeToClose';
+import NewsTrayOverlay from './NewsTrayOverlay';
 import './NewsTray.css';
 
 class NewsTray extends React.PureComponent {
@@ -41,28 +42,24 @@ class NewsTray extends React.PureComponent {
         const { children, renderHeader, onClose } = this.props;
         const { open } = this.state;
 
-        const mods = { open, with_header: false };
+        const cls = 'news-tray';
+        const clsOpen = ' news-tray_mode_open';
+        const clsClosed = ' news-tray_mode_closed';
+        const clsWithHeader = ' news-tray_with_header';
 
-        if (renderHeader) {
-            mods.with_header = true;
-        }
+        let className = cls + (open ? clsOpen : clsClosed) + (renderHeader ? clsWithHeader : '');
 
         return (
-            <div
-                className={`news-tray ${open ? 'news-tray_mode_open' : 'news-tray_mode_closed'} news-tray_with_header`}
-                ref={this.ref}
-            >
-                <div className="news-tray__overlay" />
+            <div className={className} ref={this.ref} >
                 <div className="news-tray__container">
                     {renderHeader && renderHeader('news-tray__header')}
-                    <button
-                        className="news-tray__close"
-                        onClick={onClose}
-                    />
+                    <button className="news-tray__close" onClick={onClose} />
                     <div className="news-tray__content" ref={this.scrollableRef}>
                         {children}
                     </div>
                 </div>
+
+                <NewsTrayOverlay visible={open}/>
             </div>
         );
     }

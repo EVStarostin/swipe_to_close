@@ -1,0 +1,19 @@
+.news-tray__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s linear, visibility 0s .2s linear;
+}
+
+.news-tray__overlay_visible {
+    visibility: visible;
+    opacity: .2;
+    transition: opacity .2s linear;
+}
