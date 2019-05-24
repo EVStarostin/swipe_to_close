@@ -53,7 +53,7 @@ function withSwipeToClose(WrappedComponent) {
         if (this.isGesture) {
             this.scrollableRef.addEventListener('touchmove', this.preventDefault);
         } else {
-            this.diffY = 0;
+            this.startDiffY = e.touches[0].pageY ;
             return;
         }
 
@@ -76,7 +76,9 @@ function withSwipeToClose(WrappedComponent) {
     }
 
     preventDefault = (e) => {
-        e.preventDefault();
+        if (e.cancelable) {
+            e.preventDefault();
+        }
     }
   
     render() {
