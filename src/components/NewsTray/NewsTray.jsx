@@ -56,7 +56,7 @@ class NewsTray extends React.PureComponent {
                         {children}
                     </div>
                 </div>
-
+                
                 <div className="news-tray__overlay" />
             </div>
         );
