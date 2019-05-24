@@ -12,7 +12,7 @@ function withSwipeToClose(WrappedComponent) {
 
         this.startDiffY = 0;
         this.diffY = 0;
-        this.isGesture = false;
+        this.isSwipe = false;
         this.isTargetContent = false;
     }
 
@@ -35,30 +35,24 @@ function withSwipeToClose(WrappedComponent) {
 
         this.startDiffY = e.touches[0].pageY;
         this.ref.style.transition = 'none';
+
+        if (!this.isTargetScrollable || this.isTargetScrollable && this.scrollableRef.scrollTop === 0) {
+            this.isSwipe = true;
+        }
     }
 
     handleTouchMove = (e) => {
-        this.diffY = e.touches[0].pageY - this.startDiffY;
+        const pageY = e.touches[0].pageY;
+        this.diffY = pageY - this.startDiffY;
 
-        if (
-            this.diffY > 0 &&
-            (!this.isTargetScrollable || 
-            (this.isTargetScrollable && this.scrollableRef.scrollTop === 0))
-        ) {
-            this.isGesture = true;
-        } else {
-            this.isGesture = false;
-        };
+        this.isSwipe = this.isSwipe && this.diffY > 0 ? true : false;
 
-        if (this.isGesture) {
+        if (this.isSwipe) {
             this.scrollableRef.addEventListener('touchmove', this.preventDefault);
-        } else {
-            this.startDiffY = e.touches[0].pageY ;
-            return;
-        }
-
-        if (this.diffY > 0) {
             this.ref.style.transform = `translateY(${this.diffY}px)`;
+        } else {
+            this.startDiffY = pageY ;
+            return;
         }
     }
 
