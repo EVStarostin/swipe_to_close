@@ -3,7 +3,7 @@ import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'bo
 import withSwipeToClose from './withSwipeToClose';
 import './NewsTray.css';
 
-class NewsTrayPresenter extends React.PureComponent {
+class NewsTray extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -107,4 +107,4 @@ class NewsTrayPresenter extends React.PureComponent {
     };
 }
 
-export default withSwipeToClose(NewsTrayPresenter);
+export default withSwipeToClose(NewsTray);
