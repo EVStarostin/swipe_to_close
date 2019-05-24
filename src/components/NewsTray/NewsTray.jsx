@@ -50,8 +50,8 @@ class NewsTray extends React.PureComponent {
         let className = cls + (open ? clsOpen : clsClosed) + (renderHeader ? clsWithHeader : '');
 
         return (
-            <div className={className} ref={this.ref} >
-                <div className="news-tray__container">
+            <>
+                <div className={className} ref={this.ref}>
                     {renderHeader && renderHeader('news-tray__header')}
                     <button className="news-tray__close" onClick={onClose} />
                     <div className="news-tray__content" ref={this.scrollableRef}>
@@ -59,8 +59,8 @@ class NewsTray extends React.PureComponent {
                     </div>
                 </div>
 
-                <NewsTrayOverlay visible={open}/>
-            </div>
+                <NewsTrayOverlay visible={open} />
+            </>
         );
     }
 
