@@ -6,7 +6,7 @@ class App extends React.PureComponent {
     constructor(props) {
         super(props);
 
-        this.state = { trayOpen: true };
+        this.state = { trayOpen: false };
     }
 
     handleClick = () => {
