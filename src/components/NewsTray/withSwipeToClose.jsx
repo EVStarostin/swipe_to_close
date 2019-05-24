@@ -39,12 +39,11 @@ function withSwipeToClose(WrappedComponent) {
 
     handleTouchMove = (e) => {
         this.diffY = e.touches[0].pageY - this.startDiffY;
-        const isFullyScrolled = this.scrollableRef.scrollHeight - this.scrollableRef.scrollTop === this.scrollableRef.clientHeight;
 
         if (
-            (!this.isTargetScrollable && this.diffY > 0) || 
-            (this.isTargetScrollable && this.scrollableRef.scrollTop === 0 && this.diffY > 0) ||
-            (this.isTargetScrollable && isFullyScrolled && this.diffY < 0)
+            this.diffY > 0 &&
+            (!this.isTargetScrollable || 
+            (this.isTargetScrollable && this.scrollableRef.scrollTop === 0))
         ) {
             this.isGesture = true;
         } else {
@@ -69,6 +68,7 @@ function withSwipeToClose(WrappedComponent) {
             this.props.onClose();
         }
 
+        this.diffY = 0;
         this.ref.style.transform = '';
         this.ref.style.transition = '';
         this.scrollableRef.removeEventListener('touchmove', this.preventDefault);

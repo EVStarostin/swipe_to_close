@@ -1,4 +1,5 @@
 import React from 'react';
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import withSwipeToClose from './withSwipeToClose';
 import './NewsTray.css';
 
@@ -26,6 +27,10 @@ class NewsTrayPresenter extends React.PureComponent {
             this.close();
         }
     }
+
+    componentWillUnmount() {
+        clearAllBodyScrollLocks();
+      }
 
     render() {
         const { children, renderHeader, onClose, setRef, setScrollableRef } = this.props;
@@ -68,11 +73,13 @@ class NewsTrayPresenter extends React.PureComponent {
     }
 
     beforeOpen() {
-        this.pinBody();
+        disableBodyScroll(document.querySelector('.news-tray__content'));
+        // this.pinBody();
     }
 
     afterClose() {
-        this.unPinBody();
+        enableBodyScroll(document.querySelector('.news-tray__content'));
+        // this.unPinBody();
     }
 
     pinBody() {
@@ -91,7 +98,7 @@ class NewsTrayPresenter extends React.PureComponent {
         deviceInfo: {
             OSFamily: ''
         },
-        onClose: () => null,
+        onClose: () => null
     };
 }
 
