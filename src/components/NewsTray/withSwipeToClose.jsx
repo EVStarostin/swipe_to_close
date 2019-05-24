@@ -36,7 +36,7 @@ function withSwipeToClose(WrappedComponent) {
         this.startDiffY = e.touches[0].pageY;
         this.ref.style.transition = 'none';
 
-        if (!this.isTargetScrollable || this.isTargetScrollable && this.scrollableRef.scrollTop === 0) {
+        if (!this.isTargetScrollable || (this.isTargetScrollable && this.scrollableRef.scrollTop === 0)) {
             this.isSwipe = true;
         }
     }
@@ -45,6 +45,8 @@ function withSwipeToClose(WrappedComponent) {
         const pageY = e.touches[0].pageY;
         this.diffY = pageY - this.startDiffY;
 
+
+        console.log();
         this.isSwipe = this.isSwipe && this.diffY > 0 ? true : false;
 
         if (this.isSwipe) {
@@ -63,6 +65,7 @@ function withSwipeToClose(WrappedComponent) {
             this.props.onClose();
         }
 
+        this.isSwipe = false;
         this.diffY = 0;
         this.ref.style.transform = '';
         this.ref.style.transition = '';
