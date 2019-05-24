@@ -52,12 +52,12 @@ function withSwipeToClose(WrappedComponent) {
 
         if (this.isGesture) {
             this.scrollableRef.addEventListener('touchmove', this.preventDefault);
+        } else {
+            return;
         }
 
-        if (this.isGesture && this.diffY > 0) {
+        if (this.diffY > 0) {
             this.ref.style.transform = `translateY(${this.diffY}px)`;
-        } else {
-            this.diffY = 0;
         }
     }
 

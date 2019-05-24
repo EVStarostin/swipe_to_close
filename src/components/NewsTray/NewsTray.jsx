@@ -74,12 +74,12 @@ class NewsTrayPresenter extends React.PureComponent {
 
     beforeOpen() {
         disableBodyScroll(document.querySelector('.news-tray__content'));
-        // this.pinBody();
+        this.pinBody();
     }
 
     afterClose() {
         enableBodyScroll(document.querySelector('.news-tray__content'));
-        // this.unPinBody();
+        this.unPinBody();
     }
 
     pinBody() {
