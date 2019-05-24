@@ -45,8 +45,6 @@ function withSwipeToClose(WrappedComponent) {
         const pageY = e.touches[0].pageY;
         this.diffY = pageY - this.startDiffY;
 
-
-        console.log();
         this.isSwipe = this.isSwipe && this.diffY > 0 ? true : false;
 
         if (this.isSwipe) {
