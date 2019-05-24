@@ -53,6 +53,7 @@ function withSwipeToClose(WrappedComponent) {
         if (this.isGesture) {
             this.scrollableRef.addEventListener('touchmove', this.preventDefault);
         } else {
+            this.diffY = 0;
             return;
         }
 

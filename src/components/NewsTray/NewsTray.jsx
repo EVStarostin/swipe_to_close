@@ -8,12 +8,17 @@ class NewsTrayPresenter extends React.PureComponent {
         super(props);
 
         this.state = { open: false };
+        this.ref = React.createRef();
+        this.scrollableRef = React.createRef();
     }
 
     componentDidMount() {
         if (this.props.open) {
             this.open();
         }
+
+        this.props.setRef(this.ref.current);
+        this.props.setScrollableRef(this.scrollableRef.current);
     }
 
     componentDidUpdate(prevProps) {
@@ -33,7 +38,7 @@ class NewsTrayPresenter extends React.PureComponent {
       }
 
     render() {
-        const { children, renderHeader, onClose, setRef, setScrollableRef } = this.props;
+        const { children, renderHeader, onClose } = this.props;
         const { open } = this.state;
 
         const mods = { open, with_header: false };
@@ -45,7 +50,7 @@ class NewsTrayPresenter extends React.PureComponent {
         return (
             <div
                 className={`news-tray ${open ? 'news-tray_mode_open' : 'news-tray_mode_closed'} news-tray_with_header`}
-                ref={setRef}
+                ref={this.ref}
             >
                 <div className="news-tray__overlay" />
                 <div className="news-tray__container">
@@ -54,7 +59,7 @@ class NewsTrayPresenter extends React.PureComponent {
                         className="news-tray__close"
                         onClick={onClose}
                     />
-                    <div className="news-tray__content" ref={setScrollableRef}>
+                    <div className="news-tray__content" ref={this.scrollableRef}>
                         {children}
                     </div>
                 </div>
@@ -73,12 +78,12 @@ class NewsTrayPresenter extends React.PureComponent {
     }
 
     beforeOpen() {
-        disableBodyScroll(document.querySelector('.news-tray__content'));
+        disableBodyScroll(this.scrollableRef.current);
         this.pinBody();
     }
 
     afterClose() {
-        enableBodyScroll(document.querySelector('.news-tray__content'));
+        enableBodyScroll(this.scrollableRef.current);
         this.unPinBody();
     }
 
