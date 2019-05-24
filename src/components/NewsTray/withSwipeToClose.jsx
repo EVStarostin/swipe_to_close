@@ -31,6 +31,11 @@ function withSwipeToClose(WrappedComponent) {
         }
 
         handleTouchStart = (e) => {
+            if (e.touches.length > 1 && this.isSwipe) {
+                e.preventDefault();
+                return;
+            }
+
             this.isTargetScrollable = this.scrollableRef.contains(e.target) ? true : false;
 
             this.startDiffY = e.touches[0].pageY;
@@ -51,7 +56,7 @@ function withSwipeToClose(WrappedComponent) {
                 this.scrollableRef.addEventListener('touchmove', this.preventDefault);
                 this.ref.style.transform = `translateY(${this.diffY}px)`;
             } else {
-                this.startDiffY = pageY ;
+                this.startDiffY = pageY;
                 return;
             }
         }
@@ -59,7 +64,7 @@ function withSwipeToClose(WrappedComponent) {
         handleTouchEndOrCancel = (e) => {
             const requiredDiffY = this.ref.clientHeight / 3;
 
-            if (this.diffY > requiredDiffY) {
+            if (this.isSwipe && this.diffY > requiredDiffY) {
                 this.props.onClose();
             }
 
@@ -86,7 +91,7 @@ function withSwipeToClose(WrappedComponent) {
     }
 
     withSwipeToClose.displayName = `withSwipeToClose(${getDisplayName(WrappedComponent)})`;
-    
+
     return withSwipeToClose;
 }
 
