@@ -15,5 +15,5 @@
 .news-tray__overlay_visible {
     visibility: visible;
     opacity: .2;
-    transition: opacity .2s linear;
+    transition: opacity .3s linear;
 }
