@@ -5,10 +5,10 @@ function withSwipeToClose(WrappedComponent) {
       constructor(props) {
         super(props);
         
-        this.trayRef = null;
-        this.setTrayRef = element => { this.trayRef = element };
-        this.contentRef = null;
-        this.setContentRef = element => { this.contentRef = element };
+        this.ref = null;
+        this.setRef = element => { this.ref = element };
+        this.scrollableRef = null;
+        this.setScrollableRef = element => { this.scrollableRef = element };
 
         this.startDiffY = 0;
         this.diffY = 0;
@@ -17,68 +17,72 @@ function withSwipeToClose(WrappedComponent) {
     }
 
     componentDidMount() {
-        this.trayRef.addEventListener('touchstart', this.handleTouchStart);
-        this.trayRef.addEventListener('touchmove', this.handleTouchMove);
-        this.trayRef.addEventListener('touchend', this.handleTouchEndOrCancel);
-        this.trayRef.addEventListener('touchcancel', this.handleTouchEndOrCancel);
+        this.ref.addEventListener('touchstart', this.handleTouchStart);
+        this.ref.addEventListener('touchmove', this.handleTouchMove);
+        this.ref.addEventListener('touchend', this.handleTouchEndOrCancel);
+        this.ref.addEventListener('touchcancel', this.handleTouchEndOrCancel);
     }
 
     componentWillUnmount() {
-        this.trayRef.removeEventListener('touchstart', this.handleTouchStart);
-        this.trayRef.removeEventListener('touchmove', this.handleTouchMove);
-        this.trayRef.removeEventListener('touchend', this.handleTouchEndOrCancel);
-        this.trayRef.removeEventListener('touchcancel', this.handleTouchEndOrCancel);
+        this.ref.removeEventListener('touchstart', this.handleTouchStart);
+        this.ref.removeEventListener('touchmove', this.handleTouchMove);
+        this.ref.removeEventListener('touchend', this.handleTouchEndOrCancel);
+        this.ref.removeEventListener('touchcancel', this.handleTouchEndOrCancel);
     }
 
     handleTouchStart = (e) => {
-        this.isTargetContent = this.contentRef.contains(e.target) ? true : false;
-
-        if (!this.isTargetContent || (this.props.open && this.contentRef.scrollTop <= 0)) {
-            this.isGesture = true;
-        }
+        this.isTargetScrollable = this.scrollableRef.contains(e.target) ? true : false;
 
         this.startDiffY = e.touches[0].pageY;
-        this.trayRef.style.transition = 'none';
+        this.ref.style.transition = 'none';
     }
 
     handleTouchMove = (e) => {
-        if (this.isGesture) {
-            this.contentRef.ontouchmove = () => { e.preventDefault() };
-        } else {
-            this.contentRef.ontouchmove = null;
-            return;
-        }
-
-        if (this.isTargetContent && this.contentRef.scrollTop > 0) {
-            this.isGesture = false;
-        }
-
         this.diffY = e.touches[0].pageY - this.startDiffY;
+        const isFullyScrolled = this.scrollableRef.scrollHeight - this.scrollableRef.scrollTop === this.scrollableRef.clientHeight;
 
-        if (this.diffY > 0) {
-            this.trayRef.style.transform = `translateY(${this.diffY}px)`;
+        if (
+            (!this.isTargetScrollable && this.diffY > 0) || 
+            (this.isTargetScrollable && this.scrollableRef.scrollTop === 0 && this.diffY > 0) ||
+            (this.isTargetScrollable && isFullyScrolled && this.diffY < 0)
+        ) {
+            this.isGesture = true;
+        } else {
+            this.isGesture = false;
+        };
+
+        if (this.isGesture) {
+            this.scrollableRef.addEventListener('touchmove', this.preventDefault);
+        }
+
+        if (this.isGesture && this.diffY > 0) {
+            this.ref.style.transform = `translateY(${this.diffY}px)`;
+        } else {
+            this.diffY = 0;
         }
     }
 
     handleTouchEndOrCancel = (e) => {
-        const requiredDiffY = this.trayRef.clientHeight / 3;
+        const requiredDiffY = this.ref.clientHeight / 3;
 
         if (this.diffY > requiredDiffY) {
             this.props.onClose();
         }
 
-        this.diffY = 0;
-        this.trayRef.style.transform = '';
-        this.trayRef.style.transition = '';
-        this.isGesture = false;
+        this.ref.style.transform = '';
+        this.ref.style.transition = '';
+        this.scrollableRef.removeEventListener('touchmove', this.preventDefault);
+    }
+
+    preventDefault = (e) => {
+        e.preventDefault();
     }
   
     render() {
         return <WrappedComponent
             {...this.props}
-            ref={this.ref}
-            setTrayRef={this.setTrayRef}
-            setContentRef={this.setContentRef}
+            setRef={this.setRef}
+            setScrollableRef={this.setScrollableRef}
         />;
       }
     };

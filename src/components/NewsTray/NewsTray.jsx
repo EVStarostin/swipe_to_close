@@ -2,16 +2,11 @@ import React from 'react';
 import withSwipeToClose from './withSwipeToClose';
 import './NewsTray.css';
 
-class NewsTrayBase extends React.PureComponent {
+class NewsTrayPresenter extends React.PureComponent {
     constructor(props) {
         super(props);
 
         this.state = { open: false };
-
-        this.trayRef = React.createRef();
-        this.contentRef = React.createRef();
-        this.containerRef = React.createRef();
-        this.startDiff = 0;
     }
 
     componentDidMount() {
@@ -33,7 +28,7 @@ class NewsTrayBase extends React.PureComponent {
     }
 
     render() {
-        const { children, renderHeader, onClose } = this.props;
+        const { children, renderHeader, onClose, setRef, setScrollableRef } = this.props;
         const { open } = this.state;
 
         const mods = { open, with_header: false };
@@ -45,7 +40,7 @@ class NewsTrayBase extends React.PureComponent {
         return (
             <div
                 className={`news-tray ${open ? 'news-tray_mode_open' : 'news-tray_mode_closed'} news-tray_with_header`}
-                ref={this.props.setTrayRef}
+                ref={setRef}
             >
                 <div className="news-tray__overlay" />
                 <div className="news-tray__container">
@@ -54,7 +49,7 @@ class NewsTrayBase extends React.PureComponent {
                         className="news-tray__close"
                         onClick={onClose}
                     />
-                    <div className="news-tray__content" ref={this.props.setContentRef}>
+                    <div className="news-tray__content" ref={setScrollableRef}>
                         {children}
                     </div>
                 </div>
@@ -100,4 +95,4 @@ class NewsTrayBase extends React.PureComponent {
     };
 }
 
-export default withSwipeToClose(NewsTrayBase);
+export default withSwipeToClose(NewsTrayPresenter);
