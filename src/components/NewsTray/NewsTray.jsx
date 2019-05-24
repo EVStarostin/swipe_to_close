@@ -1,7 +1,6 @@
 import React from 'react';
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import withSwipeToClose from './withSwipeToClose';
-import NewsTrayOverlay from './NewsTrayOverlay';
 import './NewsTray.css';
 
 class NewsTray extends React.PureComponent {
@@ -49,8 +48,8 @@ class NewsTray extends React.PureComponent {
         let className = cls + (open ? clsOpen : '') + (renderHeader ? clsWithHeader : '');
 
         return (
-            <>
-                <div className={className} ref={this.ref}>
+            <div className={className}>
+                <div className="news-tray__container" ref={this.ref}>
                     {renderHeader && renderHeader('news-tray__header')}
                     <button className="news-tray__close" onClick={onClose} />
                     <div className="news-tray__content" ref={this.scrollableRef}>
@@ -58,8 +57,8 @@ class NewsTray extends React.PureComponent {
                     </div>
                 </div>
 
-                <NewsTrayOverlay visible={open} />
-            </>
+                <div className="news-tray__overlay" />
+            </div>
         );
     }
 
