@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/swipe_to_close/static/css/main.1eb26caf.chunk.css",
+    "main.css": "/swipe_to_close/static/css/main.1b0ad732.chunk.css",
     "main.js": "/swipe_to_close/static/js/main.dd3db71b.chunk.js",
     "main.js.map": "/swipe_to_close/static/js/main.dd3db71b.chunk.js.map",
     "runtime~main.js": "/swipe_to_close/static/js/runtime~main.01dd5540.js",
@@ -8,9 +8,9 @@
     "static/js/2.08b1a159.chunk.js": "/swipe_to_close/static/js/2.08b1a159.chunk.js",
     "static/js/2.08b1a159.chunk.js.map": "/swipe_to_close/static/js/2.08b1a159.chunk.js.map",
     "index.html": "/swipe_to_close/index.html",
-    "precache-manifest.3956244398c0ceb0a29ada7006456bf2.js": "/swipe_to_close/precache-manifest.3956244398c0ceb0a29ada7006456bf2.js",
+    "precache-manifest.d8cabb9e6ea449b8ea4cb57ceac6ea6d.js": "/swipe_to_close/precache-manifest.d8cabb9e6ea449b8ea4cb57ceac6ea6d.js",
     "service-worker.js": "/swipe_to_close/service-worker.js",
-    "static/css/main.1eb26caf.chunk.css.map": "/swipe_to_close/static/css/main.1eb26caf.chunk.css.map",
+    "static/css/main.1b0ad732.chunk.css.map": "/swipe_to_close/static/css/main.1b0ad732.chunk.css.map",
     "static/media/NewsTray.css": "/swipe_to_close/static/media/close.b1da670d.svg"
   }
 }
