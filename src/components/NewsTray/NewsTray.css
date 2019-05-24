@@ -80,15 +80,6 @@
     -webkit-overflow-scrolling: touch;
 }
 
-.page_tray_open {
-    position: fixed;
-
-    overflow: hidden;
-
-    width: 100%;
-    height: 100%;
-}
-
 .news-tray__overlay {
     position: fixed;
     top: 0;
@@ -106,4 +97,11 @@
     visibility: visible;
     opacity: .5;
     transition: opacity .3s linear;
+}
+
+.page_tray_open {
+    position: fixed;
+
+    width: 100%;
+    height: 100%;
 }
